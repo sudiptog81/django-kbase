@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+Error {{status}} | KBase
+{% endblock %}
+
+{% block content %}
+<h1 class="my-5 text-center">Oops, we hit a wall!</h1>
+<h5 class="text-center">Error {{status}}</h2>
+{% endblock %}

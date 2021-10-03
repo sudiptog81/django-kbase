@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+KBase Home
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8 mx-auto text-center">
+    <h1 class="mt-5">KBase: A Knowledge Base built on Django</h1>
+    <p class="lead">Prepared for a scrutiny round at NIT Kurukshetra for a Project Position</p>
+  </div>
+  <div class="col-md-6 mt-4 mx-auto text-center">
+    <p>
+      This web application primarily lists articles by registered users which can be read by all visitors,
+      however, can be edited only by the contributors or the superusers. It also has a search functionality.
+    </p>
+  </div>
+</div>
+{% endblock %}

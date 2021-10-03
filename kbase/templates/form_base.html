@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+<div class="row text-center my-5">
+  <h2>
+    {% block heading %}
+    {% endblock heading %} 
+  </h2>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-12 mx-auto">
+  {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            {% include "partials/_error.html" with error=error %}
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        {% include "partials/_error.html" with error=error %}
+    {% endfor %}
+  {% endif %}
+  {% if error %}
+    {% include "partials/_error.html" with error=error %}
+  {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div class="mb-3">
+          <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}</label>
+          {{ field }}
+        </div>
+    {% endfor %}
+    
+    <button type="submit" class="btn btn-primary">
+      {% block button_label %}
+      {% endblock button_label %} 
+    </button>
+  </form>
+</div>
+{% endblock content %}

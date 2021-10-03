@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{% if article %}
+  {{article.title}} - {{article.contributor.username}} | KBase
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if article %}
+<div class="row my-3">
+  <div class="col-md-8 col-sm-12 mx-auto text-justified">
+    <h2>{{article.title}}</h2>
+    <h6>contributed by {{article.contributor.username}} | last modified at {{article.last_modified}}</h6>
+    <p>
+    {% for category in categories %}
+    <span class="badge rounded-pill bg-secondary me-1">{{category.name}}</span>
+    {% endfor %}
+    </p>
+    <p>
+    {% if request.user.id == article.contributor.id or request.user.is_superuser %}
+    <form action="{{article.get_delete_url}}" method="post">
+      {% csrf_token %}
+       <a href="{{article.get_update_url}}" class="btn btn-sm btn-primary">Edit</a>
+       <input class="btn btn-sm btn-danger" type="submit" value="Delete" />
+    </form>
+    {% endif %}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-sm-12 mx-auto text-justified">
+  {{article.body|safe}}
+  </div>
+</div>
+{% endif %}
+{% endblock %}

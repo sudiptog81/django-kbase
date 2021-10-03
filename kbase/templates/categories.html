@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  All Categories | KBase
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="row my-3">
+  <div class="col-md-8 col-sm-12 mx-auto text-center">
+    <a class="btn btn-dark" href="{% url 'create_category' %}">Add Category</a>
+  </div>
+</div>
+{% endif %}
+
+{% if categories %}
+{% for category in categories %}
+<div class="row my-3">
+  <div class="col-md-8 col-sm-12 mx-auto text-justified">
+    <a href="{% url 'category' category.name %}"><h4>{{category.name}}</h4></a>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{% if category %}
+  {{category}} Articles | KBase
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row my-3 text-center">
+  <h2>Category: {{category}}</h2>
+</div>
+<div class="row my-4 ">
+  <div class="col-md-8 col-sm-12 mx-auto text-justified">
+  {% if articles %}
+  {% for article in articles %}
+    <div class="card w-100 mb-4">
+      <div class="card-body">
+        <h5 class="card-title">{{article.title}}</h5>
+        <h6 class="card-subtitle">contributed by {{article.contributor.username}}</h6>
+        <p class="card-text">{{article.body|safe|truncatechars:400}}</p>
+        <a class="btn btn-dark" href="{% url 'article' article.slug %}" target="_blank">Read More</a>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+{% else %}
+<div class="mb-5">
+<div class="row">
+  <div class="col-md-8 col-sm-12 mx-auto text-center">
+    <h6>no articles found</h6>
+  </div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
